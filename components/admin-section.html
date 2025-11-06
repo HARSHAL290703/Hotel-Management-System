@@ -1,0 +1,64 @@
+<!-- Admin Section Component -->
+<section id="section-admin" class="section">
+  <header>
+    <h1>⚙️ Administration Panel</h1>
+    <p class="subtitle">Advanced room management - Add, Search, and Delete operations</p>
+  </header>
+  
+  <!-- Quick Search Box -->
+  <div class="quick-search-box">
+    <input id="searchInput" placeholder="🔍 Search by room number, type, or price..." type="text">
+    <select id="searchFilter">
+      <option value="all">All Rooms</option>
+      <option value="available">Available Only</option>
+      <option value="booked">Booked Only</option>
+    </select>
+    <select id="typeFilter" onchange="window.roomsManager.filterByType(this.value)">
+      <option value="all">All Types</option>
+      <option value="SingleRoom">Single Room</option>
+      <option value="DoubleRoom">Double Room</option>
+      <option value="SuiteRoom">Luxury Suite</option>
+    </select>
+    <select id="sortFilter" onchange="window.roomsManager.sortRooms(this.value)">
+      <option value="">Sort By...</option>
+      <option value="number">Room Number</option>
+      <option value="price-asc">Price: Low to High</option>
+      <option value="price-desc">Price: High to Low</option>
+      <option value="type">Room Type</option>
+    </select>
+  </div>
+  <div id="searchResults" class="search-results-compact"></div>
+  
+  <div class="grid grid-2 admin-grid">
+    <div class="card admin-form-card">
+      <h2>➕ Add New Room</h2>
+      <div class="form-group">
+        <label>Room Number:</label>
+        <input id="roomNo" placeholder="Enter room number (e.g., 101)" type="text">
+      </div>
+      <div class="form-group">
+        <label>Room Type:</label>
+        <select id="roomType">
+          <option value="SingleRoom">Single Room</option>
+          <option value="DoubleRoom">Double Room</option>
+          <option value="SuiteRoom">Luxury Suite</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Price per night (₹):</label>
+        <input id="roomPrice" type="number" placeholder="Enter price (e.g., 1500)" min="1">
+      </div>
+      <button id="addRoomBtn" class="btn-primary">➕ Add Room</button>
+    </div>
+  </div>
+
+  <!-- All Rooms Management -->
+  <div class="card admin-rooms-card">
+    <h2>📋 Complete Room Inventory</h2>
+    <p class="admin-description">
+      Manage your entire room inventory. Available rooms can be deleted directly. 
+      Booked rooms must be unbooked before deletion.
+    </p>
+    <div id="allRoomsList" class="rooms-list"></div>
+  </div>
+</section>

@@ -1,0 +1,18 @@
+<!-- Bookings Section Component -->
+<section id="section-bookings" class="section">
+  <header>
+    <h1>📋 Bookings Overview</h1>
+    <p class="subtitle">Complete view of all active reservations and guest bookings</p>
+  </header>
+  
+  <div class="card bookings-card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <h2>📋 Active Reservations</h2>
+      <button onclick="window.roomsManager.exportBookings()" class="btn-secondary" style="padding: 8px 16px;">
+        📄 Export/Print
+      </button>
+    </div>
+    <div id="bookingsList" class="rooms-list"></div>
+  </div>
+</section>
+

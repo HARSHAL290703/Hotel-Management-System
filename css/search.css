@@ -1,0 +1,99 @@
+/* Modern Search Box Styles */
+.quick-search-box {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
+}
+
+.quick-search-box:focus-within {
+  border-color: var(--primary-cyan);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+  transform: translateY(-2px);
+}
+
+.quick-search-box input {
+  flex: 1;
+  padding: var(--spacing-md);
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  margin: 0;
+  color: var(--text-primary);
+  transition: all var(--transition-normal);
+}
+
+.quick-search-box input:focus {
+  outline: none;
+  border-color: var(--primary-cyan);
+  background: rgba(30, 41, 59, 0.8);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+}
+
+.quick-search-box select {
+  width: 150px;
+  padding: var(--spacing-md);
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  margin: 0;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.quick-search-box select:focus {
+  outline: none;
+  border-color: var(--primary-cyan);
+  background: rgba(30, 41, 59, 0.8);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+}
+
+/* Search Results */
+.search-results-compact {
+  margin-top: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  max-height: 400px;
+  overflow-y: auto;
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--spacing-md);
+}
+
+.search-results-compact table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.search-results-compact table tr {
+  border-bottom: 1px solid var(--border-color);
+  transition: all var(--transition-fast);
+}
+
+.search-results-compact table tr:hover {
+  background: rgba(20, 184, 166, 0.1);
+  transform: translateX(4px);
+}
+
+.search-results-compact table td {
+  padding: var(--spacing-md);
+  vertical-align: middle;
+  color: var(--text-secondary);
+}
+
+.search-results-compact table td:first-child {
+  font-weight: 600;
+  color: var(--text-primary);
+}

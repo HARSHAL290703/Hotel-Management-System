@@ -1,0 +1,41 @@
+<!-- Navigation Bar Component -->
+<nav class="navbar">
+  <div class="navbar-container">
+    <a href="#" class="navbar-brand" onclick="navigationManager.navigate('dashboard'); return false;">
+      <span class="brand-icon">🏨</span>
+      <span class="brand-text">Elite Hotel</span>
+    </a>
+    <div class="navbar-toggle" onclick="navigationManager.toggleMobileMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul class="navbar-menu">
+      <li class="navbar-item">
+        <a href="#" class="navbar-link active" data-section="dashboard" onclick="navigationManager.navigate('dashboard'); return false;">
+          <span class="nav-icon">🏠</span>
+          <span class="nav-text">Home</span>
+        </a>
+      </li>
+      <li class="navbar-item">
+        <a href="#" class="navbar-link" data-section="rooms" onclick="navigationManager.navigate('rooms'); return false;">
+          <span class="nav-icon">🛏️</span>
+          <span class="nav-text">Rooms</span>
+        </a>
+      </li>
+      <li class="navbar-item">
+        <a href="#" class="navbar-link" data-section="admin" onclick="navigationManager.navigate('admin'); return false;">
+          <span class="nav-icon">⚙️</span>
+          <span class="nav-text">Admin</span>
+        </a>
+      </li>
+      <li class="navbar-item">
+        <a href="#" class="navbar-link" data-section="bookings" onclick="navigationManager.navigate('bookings'); return false;">
+          <span class="nav-icon">📋</span>
+          <span class="nav-text">Bookings</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+

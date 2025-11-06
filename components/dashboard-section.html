@@ -1,0 +1,64 @@
+<!-- Dashboard Section Component -->
+<section id="section-dashboard" class="section active">
+  <header>
+    <h1>🏨 Elite Hotel Management</h1>
+    <p class="subtitle">Streamlined booking system with advanced payment processing</p>
+  </header>
+  
+  <!-- Statistics Cards -->
+  <div class="grid grid-4 stats-grid" id="statsGrid">
+    <div class="card stat-card">
+      <div class="stat-icon">🏨</div>
+      <div class="stat-value" id="statTotalRooms">-</div>
+      <div class="stat-label">Total Rooms</div>
+    </div>
+    <div class="card stat-card">
+      <div class="stat-icon">✅</div>
+      <div class="stat-value" id="statAvailableRooms">-</div>
+      <div class="stat-label">Available</div>
+    </div>
+    <div class="card stat-card">
+      <div class="stat-icon">📋</div>
+      <div class="stat-value" id="statBookedRooms">-</div>
+      <div class="stat-label">Booked</div>
+    </div>
+    <div class="card stat-card">
+      <div class="stat-icon">💰</div>
+      <div class="stat-value" id="statRevenue">₹0</div>
+      <div class="stat-label">Total Revenue</div>
+    </div>
+  </div>
+  <div class="card stat-card-full">
+    <div class="stat-label">Occupancy Rate</div>
+    <div class="stat-value-large" id="statOccupancyRate">-</div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="occupancyProgress"></div>
+    </div>
+  </div>
+
+  <div class="card dashboard-welcome-card">
+    <h2>Welcome to Elite Hotel Management</h2>
+    <p class="dashboard-description">
+      Experience a sophisticated, modern solution for managing hotel operations. 
+      Seamlessly handle room inventory, bookings, and guest reservations with our intuitive platform.
+    </p>
+    <div class="grid grid-3 dashboard-grid">
+      <div class="card dashboard-feature-card" onclick="navigationManager.navigate('rooms');">
+        <div class="feature-icon">🛏️</div>
+        <h3>Room Management</h3>
+        <p>Comprehensive view and control of all available and booked rooms</p>
+      </div>
+      <div class="card dashboard-feature-card" onclick="navigationManager.navigate('admin');">
+        <div class="feature-icon">⚙️</div>
+        <h3>Administration</h3>
+        <p>Add new rooms, search inventory, and manage hotel settings</p>
+      </div>
+      <div class="card dashboard-feature-card" onclick="navigationManager.navigate('bookings');">
+        <div class="feature-icon">📋</div>
+        <h3>Bookings Overview</h3>
+        <p>Track all current bookings and guest reservation details</p>
+      </div>
+    </div>
+  </div>
+</section>
+

@@ -1,0 +1,49 @@
+<!-- Booking Modal -->
+<div id="bookingModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="window.bookingManager.closeBookingModal()">&times;</span>
+    <h2>📋 Book Room</h2>
+    
+    <!-- Booking Step -->
+    <div id="bookingStep">
+      <div class="form-group">
+        <label>Guest Name:</label>
+        <input id="guestName" type="text" placeholder="Enter guest name" required>
+      </div>
+      <div class="form-group">
+        <label>Check-in Date:</label>
+        <input id="checkIn" type="date" required>
+      </div>
+      <div class="form-group">
+        <label>Check-out Date:</label>
+        <input id="checkOut" type="date" required>
+      </div>
+      <div class="form-group">
+        <button id="calculateCostBtn" class="btn-secondary">Calculate Cost</button>
+        <div id="costDisplay" class="cost-display">₹0</div>
+      </div>
+      <div class="modal-actions">
+        <button id="confirmBookingBtn" class="btn-primary">Confirm Booking</button>
+        <button onclick="window.bookingManager.closeBookingModal()" class="btn-secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Booking Summary Modal -->
+<div id="summaryModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="window.bookingManager.closeSummaryModal()">&times;</span>
+    <h2>✅ Booking Confirmed!</h2>
+    <div class="summary-details">
+      <p><strong>Room Number:</strong> <span id="summaryRoomNo"></span></p>
+      <p><strong>Guest Name:</strong> <span id="summaryGuestName"></span></p>
+      <p><strong>Check-in:</strong> <span id="summaryCheckIn"></span></p>
+      <p><strong>Check-out:</strong> <span id="summaryCheckOut"></span></p>
+      <p><strong>Total Cost:</strong> <span id="summaryCost"></span></p>
+    </div>
+    <div class="modal-actions">
+      <button onclick="window.bookingManager.closeSummaryModal()" class="btn-primary">Close</button>
+    </div>
+  </div>
+</div>

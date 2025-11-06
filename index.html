@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hotel Management System</title>
+  
+  <!-- Modular CSS Files -->
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/cards.css" />
+  <link rel="stylesheet" href="css/forms.css" />
+  <link rel="stylesheet" href="css/search.css" />
+  <link rel="stylesheet" href="css/modals.css" />
+</head>
+<body>
+
+  <!-- Navigation Bar Component -->
+  <div id="navbar-placeholder"></div>
+
+  <div class="container">
+    <!-- Dashboard Section Component -->
+    <div id="dashboard-section-placeholder"></div>
+
+    <!-- Rooms Section Component -->
+    <div id="rooms-section-placeholder"></div>
+
+    <!-- Admin Section Component -->
+    <div id="admin-section-placeholder"></div>
+
+    <!-- Bookings Section Component -->
+    <div id="bookings-section-placeholder"></div>
+  </div>
+
+  <!-- Modals Component -->
+  <div id="modals-placeholder"></div>
+
+  <!-- Component Loader - Must load before other scripts -->
+  <script src="js/components.js"></script>
+  
+  <!-- Modular JavaScript Files -->
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/rooms.js"></script>
+  <script src="js/booking.js"></script>
+  <script src="js/stats.js"></script>
+  
+  <script>
+    // Load components first, then initialize everything
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Load all modular components
+      await ComponentLoader.loadAllComponents();
+      
+      // Initialize main application
+      const roomsManager = new RoomsManager(API);
+      const bookingManager = new BookingManager(API, UI);
+      const statsManager = new StatisticsManager(API);
+      
+      // Make managers globally available for onclick handlers
+      window.roomsManager = roomsManager;
+      window.bookingManager = bookingManager;
+      window.statsManager = statsManager;
+      
+      // Add Room functionality
+      document.getElementById('addRoomBtn').addEventListener('click', async () => {
+        const roomNo = document.getElementById('roomNo').value.trim();
+        const price = Number(document.getElementById('roomPrice').value);
+        const roomType = document.getElementById('roomType').value;
+
+        if (!roomNo || !price) {
+          alert('Enter all details!');
+          return;
+        }
+
+        const result = await roomsManager.addRoom({
+          number: roomNo,
+          price: price,
+          type: roomType
+        });
+
+        if (result.success) {
+          document.getElementById('roomNo').value = '';
+          document.getElementById('roomPrice').value = '';
+          roomsManager.showSuccessMessage('Room added successfully!');
+        } else {
+          alert(result.error);
+        }
+      });
+
+      // Search functionality with filter
+      const searchInput = document.getElementById('searchInput');
+      const searchFilter = document.getElementById('searchFilter');
+      
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          roomsManager.searchRooms(e.target.value);
+        });
+      }
+      
+      if (searchFilter) {
+        searchFilter.addEventListener('change', () => {
+          if (searchInput && searchInput.value.trim()) {
+            roomsManager.searchRooms(searchInput.value);
+          }
+        });
+      }
+
+      // Date validation
+      document.getElementById('checkIn').addEventListener('change', () => {
+        const checkIn = document.getElementById('checkIn').value;
+        const checkOut = document.getElementById('checkOut');
+        if (checkIn) {
+          checkOut.setAttribute('min', checkIn);
+        }
+        UI.validateDates(checkIn, checkOut.value);
+      });
+
+      document.getElementById('checkOut').addEventListener('change', () => {
+        const checkIn = document.getElementById('checkIn').value;
+        const checkOut = document.getElementById('checkOut').value;
+        UI.validateDates(checkIn, checkOut);
+      });
+
+      // Calculate cost button
+      document.getElementById('calculateCostBtn').addEventListener('click', () => {
+        bookingManager.calculateCost();
+      });
+
+      // Confirm booking button
+      document.getElementById('confirmBookingBtn').addEventListener('click', () => {
+        bookingManager.confirmBooking();
+      });
+
+      // Close modals when clicking outside
+      window.addEventListener('click', (event) => {
+        const bookingModal = document.getElementById('bookingModal');
+        const summaryModal = document.getElementById('summaryModal');
+        
+        if (event.target === bookingModal) {
+          bookingManager.closeBookingModal();
+        }
+        if (event.target === summaryModal) {
+          bookingManager.closeSummaryModal();
+        }
+      });
+
+      // Update bookings list when navigating to bookings section
+      const bookingsLink = document.querySelector('[data-section="bookings"]');
+      if (bookingsLink) {
+        bookingsLink.addEventListener('click', async () => {
+          if (typeof roomsManager !== 'undefined') {
+            setTimeout(async () => {
+              await roomsManager.displayBookings();
+            }, 100);
+          }
+        });
+      }
+
+      // Also listen for navigation events
+      const originalNavigate = navigationManager.navigate.bind(navigationManager);
+      navigationManager.navigate = async (sectionName) => {
+        originalNavigate(sectionName);
+        if (sectionName === 'bookings' && typeof roomsManager !== 'undefined') {
+          setTimeout(async () => {
+            await roomsManager.displayBookings();
+          }, 100);
+        }
+        if (sectionName === 'dashboard' && typeof statsManager !== 'undefined') {
+          setTimeout(async () => {
+            await statsManager.updateStats();
+          }, 100);
+        }
+      };
+
+      // Initial render
+      roomsManager.renderRooms();
+      statsManager.updateStats();
+    });
+  </script>
+</body>
+</html>
