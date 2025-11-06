@@ -19,8 +19,12 @@ class BookingManager {
       modal.style.display = 'block';
       // Reset form
       document.getElementById('guestName').value = '';
+      document.getElementById('guestEmail').value = '';
+      document.getElementById('guestPhone').value = '';
+      document.getElementById('guestCount').value = '1';
       document.getElementById('checkIn').value = '';
       document.getElementById('checkOut').value = '';
+      document.getElementById('bookingNotes').value = '';
       document.getElementById('costDisplay').textContent = '₹0';
     }
   }
@@ -95,17 +99,27 @@ class BookingManager {
     confirmBtn.disabled = true;
 
     try {
+      const guestEmail = document.getElementById('guestEmail').value.trim();
+      const guestPhone = document.getElementById('guestPhone').value.trim();
+      const guestCount = parseInt(document.getElementById('guestCount').value) || 1;
+      const notes = document.getElementById('bookingNotes').value.trim();
+
       // Process booking
-      await this.api.bookRoom(this.currentRoomNo, {
+      const result = await this.api.bookRoom(this.currentRoomNo, {
         guestName: guestName,
+        guestEmail: guestEmail || undefined,
+        guestPhone: guestPhone || undefined,
+        guestCount: guestCount,
         checkIn: checkIn,
-        checkOut: checkOut
+        checkOut: checkOut,
+        notes: notes || undefined
       });
 
       // Store booking data for summary
       this.bookingData.guestName = guestName;
       this.bookingData.checkIn = checkIn;
       this.bookingData.checkOut = checkOut;
+      this.bookingData.confirmationNumber = result.confirmationNumber;
 
       // Show success summary
       this.showSummaryModal();
@@ -132,6 +146,7 @@ class BookingManager {
       document.getElementById('summaryCheckIn').textContent = this.ui.formatDate(this.bookingData.checkIn);
       document.getElementById('summaryCheckOut').textContent = this.ui.formatDate(this.bookingData.checkOut);
       document.getElementById('summaryCost').textContent = `₹${this.bookingData.cost.toLocaleString()}`;
+      document.getElementById('summaryConfirmation').textContent = this.bookingData.confirmationNumber || 'N/A';
       modal.style.display = 'block';
     }
   }

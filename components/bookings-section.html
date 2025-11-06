@@ -8,9 +8,14 @@
   <div class="card bookings-card">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
       <h2>📋 Active Reservations</h2>
-      <button onclick="window.roomsManager.exportBookings()" class="btn-secondary" style="padding: 8px 16px;">
-        📄 Export/Print
-      </button>
+      <div>
+        <button onclick="window.roomsManager.exportBookings()" class="btn-secondary" style="padding: 8px 16px; margin-right: 10px;">
+          📄 Export/Print
+        </button>
+        <button onclick="window.notificationsManager.refreshNotifications()" class="btn-secondary" style="padding: 8px 16px;">
+          🔔 Notifications (<span id="notificationCount">0</span>)
+        </button>
+      </div>
     </div>
     <div id="bookingsList" class="rooms-list"></div>
   </div>

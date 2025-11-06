@@ -16,6 +16,9 @@ class AbstractRoom:
         self.price: float = price
         self.is_booked: bool = False
         self.booked_by: Optional[str] = None
+        self.status: str = "available"  # available, maintenance, cleaning
+        self.amenities: List[str] = []
+        self.notes: Optional[str] = None
 
     def get_description(self) -> str:
         raise NotImplementedError
@@ -31,6 +34,9 @@ class AbstractRoom:
             "isBooked": self.is_booked,
             "bookedBy": self.booked_by,
             "type": self.type,
+            "status": self.status,
+            "amenities": self.amenities,
+            "notes": self.notes,
         }
 
 
@@ -54,12 +60,30 @@ class Booking:
     guest_name: str
     check_in: str  # ISO date string (YYYY-MM-DD)
     check_out: str  # ISO date string (YYYY-MM-DD)
+    guest_email: Optional[str] = None
+    guest_phone: Optional[str] = None
+    guest_count: int = 1
+    confirmation_number: Optional[str] = None
+    notes: Optional[str] = None
+    checked_in: bool = False
+    checked_out: bool = False
+    check_in_time: Optional[str] = None
+    check_out_time: Optional[str] = None
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "guestName": self.guest_name,
             "checkIn": self.check_in,
             "checkOut": self.check_out,
+            "guestEmail": self.guest_email,
+            "guestPhone": self.guest_phone,
+            "guestCount": self.guest_count,
+            "confirmationNumber": self.confirmation_number,
+            "notes": self.notes,
+            "checkedIn": self.checked_in,
+            "checkedOut": self.checked_out,
+            "checkInTime": self.check_in_time,
+            "checkOutTime": self.check_out_time,
         }
 
 
@@ -81,7 +105,7 @@ class Hotel:
         return next((r for r in self.rooms if r.number == room_no), None)
 
     def get_available_rooms(self) -> List[AbstractRoom]:
-        return [r for r in self.rooms if not r.is_booked]
+        return [r for r in self.rooms if not r.is_booked and r.status == "available"]
 
     def get_booked_rooms(self) -> List[AbstractRoom]:
         return [r for r in self.rooms if r.is_booked]
@@ -93,6 +117,8 @@ class Hotel:
             raise LookupError("Room not found")
         if room.is_booked:
             raise ValueError("Room already booked")
+        if room.status != "available":
+            raise ValueError(f"Room is not available for booking (status: {room.status})")
         room.is_booked = True
         room.booked_by = booking.guest_name
         self._bookings[room_no] = booking
@@ -128,6 +154,9 @@ class Hotel:
         room = cls(number, price)
         room.is_booked = bool(data.get("isBooked", False))
         room.booked_by = data.get("bookedBy")
+        room.status = data.get("status", "available")
+        room.amenities = data.get("amenities", [])
+        room.notes = data.get("notes")
         return room
 
     @staticmethod
@@ -136,6 +165,15 @@ class Hotel:
             guest_name=data["guestName"],
             check_in=data["checkIn"],
             check_out=data["checkOut"],
+            guest_email=data.get("guestEmail"),
+            guest_phone=data.get("guestPhone"),
+            guest_count=data.get("guestCount", 1),
+            confirmation_number=data.get("confirmationNumber"),
+            notes=data.get("notes"),
+            checked_in=data.get("checkedIn", False),
+            checked_out=data.get("checkedOut", False),
+            check_in_time=data.get("checkInTime"),
+            check_out_time=data.get("checkOutTime"),
         )
 
 

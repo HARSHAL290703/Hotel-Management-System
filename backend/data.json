@@ -5,28 +5,31 @@
       "price": 5000.0,
       "isBooked": false,
       "bookedBy": null,
-      "type": "DoubleRoom"
+      "type": "DoubleRoom",
+      "status": "available",
+      "amenities": [],
+      "notes": null
     },
     {
       "number": "102",
       "price": 1000.0,
       "isBooked": false,
       "bookedBy": null,
-      "type": "DoubleRoom"
+      "type": "DoubleRoom",
+      "status": "available",
+      "amenities": [],
+      "notes": null
     },
     {
       "number": "107",
       "price": 4500.0,
-      "isBooked": true,
-      "bookedBy": "harshad",
-      "type": "SingleRoom"
+      "isBooked": false,
+      "bookedBy": null,
+      "type": "SingleRoom",
+      "status": "available",
+      "amenities": [],
+      "notes": null
     }
   ],
-  "bookings": {
-    "107": {
-      "guestName": "harshad",
-      "checkIn": "2025-11-06",
-      "checkOut": "2025-11-11"
-    }
-  }
+  "bookings": {}
 }

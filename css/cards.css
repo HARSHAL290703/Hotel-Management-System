@@ -273,6 +273,21 @@
   color: white;
 }
 
+.status.maintenance {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+  color: white;
+}
+
+.status.cleaning {
+  background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+  color: white;
+}
+
+.status.checked-in {
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  color: white;
+}
+
 /* Booking Details Styles */
 .booking-item {
   background: rgba(30, 41, 59, 0.4);

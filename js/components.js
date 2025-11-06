@@ -28,15 +28,17 @@ class ComponentLoader {
     const roomsPlaceholder = document.getElementById('rooms-section-placeholder');
     const adminPlaceholder = document.getElementById('admin-section-placeholder');
     const bookingsPlaceholder = document.getElementById('bookings-section-placeholder');
+    const guestsPlaceholder = document.getElementById('guests-section-placeholder');
     const modalsPlaceholder = document.getElementById('modals-placeholder');
 
     // Load all components in parallel for better performance
-    const [navbarHtml, dashboardHtml, roomsHtml, adminHtml, bookingsHtml, modalsHtml] = await Promise.all([
+    const [navbarHtml, dashboardHtml, roomsHtml, adminHtml, bookingsHtml, guestsHtml, modalsHtml] = await Promise.all([
       navbarPlaceholder ? this.loadComponent('components/navbar.html') : Promise.resolve(''),
       dashboardPlaceholder ? this.loadComponent('components/dashboard-section.html') : Promise.resolve(''),
       roomsPlaceholder ? this.loadComponent('components/rooms-section.html') : Promise.resolve(''),
       adminPlaceholder ? this.loadComponent('components/admin-section.html') : Promise.resolve(''),
       bookingsPlaceholder ? this.loadComponent('components/bookings-section.html') : Promise.resolve(''),
+      guestsPlaceholder ? this.loadComponent('components/guests-section.html') : Promise.resolve(''),
       modalsPlaceholder ? this.loadComponent('components/modals.html') : Promise.resolve('')
     ]);
 
@@ -55,6 +57,9 @@ class ComponentLoader {
     }
     if (bookingsPlaceholder && bookingsHtml) {
       bookingsPlaceholder.outerHTML = bookingsHtml;
+    }
+    if (guestsPlaceholder && guestsHtml) {
+      guestsPlaceholder.outerHTML = guestsHtml;
     }
     if (modalsPlaceholder && modalsHtml) {
       modalsPlaceholder.outerHTML = modalsHtml;

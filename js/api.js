@@ -74,6 +74,54 @@ const API = {
   // Get statistics
   async getStats() {
     return await this.request('/stats');
+  },
+
+  // Check-in a guest
+  async checkIn(roomNo) {
+    return await this.request(`/rooms/${roomNo}/checkin`, {
+      method: 'POST'
+    });
+  },
+
+  // Check-out a guest
+  async checkOut(roomNo) {
+    return await this.request(`/rooms/${roomNo}/checkout`, {
+      method: 'POST'
+    });
+  },
+
+  // Update room status
+  async updateRoomStatus(roomNo, status, notes) {
+    return await this.request(`/rooms/${roomNo}/status`, {
+      method: 'PUT',
+      body: JSON.stringify({ status, notes })
+    });
+  },
+
+  // Update room amenities
+  async updateRoomAmenities(roomNo, amenities) {
+    return await this.request(`/rooms/${roomNo}/amenities`, {
+      method: 'PUT',
+      body: JSON.stringify({ amenities })
+    });
+  },
+
+  // Modify booking
+  async modifyBooking(roomNo, bookingData) {
+    return await this.request(`/rooms/${roomNo}/booking`, {
+      method: 'PUT',
+      body: JSON.stringify(bookingData)
+    });
+  },
+
+  // Get all guests
+  async getGuests() {
+    return await this.request('/guests');
+  },
+
+  // Get notifications
+  async getNotifications() {
+    return await this.request('/notifications');
   }
 };
 

@@ -10,6 +10,20 @@
         <label>Guest Name:</label>
         <input id="guestName" type="text" placeholder="Enter guest name" required>
       </div>
+      <div class="form-group grid grid-2">
+        <div>
+          <label>Email:</label>
+          <input id="guestEmail" type="email" placeholder="guest@email.com">
+        </div>
+        <div>
+          <label>Phone:</label>
+          <input id="guestPhone" type="tel" placeholder="+91 1234567890">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Number of Guests:</label>
+        <input id="guestCount" type="number" min="1" value="1" placeholder="1">
+      </div>
       <div class="form-group">
         <label>Check-in Date:</label>
         <input id="checkIn" type="date" required>
@@ -17,6 +31,10 @@
       <div class="form-group">
         <label>Check-out Date:</label>
         <input id="checkOut" type="date" required>
+      </div>
+      <div class="form-group">
+        <label>Special Requests / Notes:</label>
+        <textarea id="bookingNotes" rows="3" placeholder="Any special requests or notes..."></textarea>
       </div>
       <div class="form-group">
         <button id="calculateCostBtn" class="btn-secondary">Calculate Cost</button>
@@ -36,11 +54,15 @@
     <span class="close" onclick="window.bookingManager.closeSummaryModal()">&times;</span>
     <h2>✅ Booking Confirmed!</h2>
     <div class="summary-details">
+      <p><strong>Confirmation Number:</strong> <span id="summaryConfirmation" style="font-weight: bold; color: #14b8a6;"></span></p>
       <p><strong>Room Number:</strong> <span id="summaryRoomNo"></span></p>
       <p><strong>Guest Name:</strong> <span id="summaryGuestName"></span></p>
       <p><strong>Check-in:</strong> <span id="summaryCheckIn"></span></p>
       <p><strong>Check-out:</strong> <span id="summaryCheckOut"></span></p>
       <p><strong>Total Cost:</strong> <span id="summaryCost"></span></p>
+      <p style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #ddd; color: #666; font-size: 0.9rem;">
+        Please save your confirmation number for future reference.
+      </p>
     </div>
     <div class="modal-actions">
       <button onclick="window.bookingManager.closeSummaryModal()" class="btn-primary">Close</button>
