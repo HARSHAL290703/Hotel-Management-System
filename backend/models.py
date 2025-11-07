@@ -4,11 +4,7 @@ from typing import List, Optional, Dict, Any
 
 
 class AbstractRoom:
-    """Abstract base for all room types.
-
-    Enforces a common interface across room variants and carries shared state.
-    """
-
+   
     def __init__(self, number: str, price: float) -> None:
         if self.__class__ is AbstractRoom:
             raise TypeError("Cannot instantiate AbstractRoom directly")
